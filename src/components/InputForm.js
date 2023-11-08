@@ -16,7 +16,6 @@ function InputForm() {
     e.preventDefault();
     const data = {
       Email: email,
-      Parola: parola,
     };
     axios
       .post("https://sheet.best/api/sheets/728c92b1-e241-48b9-a960-b78875ac2ae7", data)
